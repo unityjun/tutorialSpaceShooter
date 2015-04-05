@@ -1,0 +1,216 @@
+fileFormatVersion: 2
+guid: 3387aa7eecdfbb84ea395dd7cf82462e
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: _healthLevel_0
+    21300002: _healthLevel_1
+    21300004: _healthLevel_2
+    21300006: _healthLevel_3
+    21300008: _healthLevel_4
+    21300010: _healthLevel_5
+    21300012: _healthLevel_6
+    21300014: _healthLevel_7
+    21300016: _healthLevel_8
+    21300018: _healthLevel_9
+    21300020: _healthLevel_10
+    21300022: _healthLevel_11
+    21300024: _healthLevel_2
+    21300026: _healthLevel_1
+    21300028: _healthLevel_1-1
+    21300030: _healthLevel_9-1
+    21300032: _healthLevel_7-1
+    21300034: _healthLevel_5-1
+    21300036: _healthLevel_3-1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: _healthLevel_2
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 3
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_1
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 3
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_1-1
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 3
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_10
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 643
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_9
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 643
+        width: 96
+        height: 156
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_9-1
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 643
+        width: 96
+        height: 156
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 483
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_7
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 483
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_7-1
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 483
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 323
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_5
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 323
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_5-1
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 323
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 162
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_3
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 162
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: _healthLevel_3-1
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 162
+        width: 96
+        height: 157
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
