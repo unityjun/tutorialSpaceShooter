@@ -1,2 +1,2 @@
 # tutorialSpaceShooter
-результат урока от результат урока от Unity Tutorials
+результат урока от Unity Tutorials
