@@ -49,15 +49,15 @@ public class PlayerController : MonoBehaviour {
 		float moveHorizontal = Input.GetAxis("Horizontal"); //x
 		float moveVertical = Input.GetAxis("Vertical"); //z
 
-		float xPos = Mathf.Clamp(rigidbody.position.x,boundary.xMin,boundary.xMax);
-		float zPos = Mathf.Clamp(rigidbody.position.z,boundary.zMin,boundary.zMax);
+		float xPos = Mathf.Clamp(GetComponent<Rigidbody>().position.x,boundary.xMin,boundary.xMax);
+		float zPos = Mathf.Clamp(GetComponent<Rigidbody>().position.z,boundary.zMin,boundary.zMax);
 
 		Vector3 movement = new Vector3(moveHorizontal,0.0f,moveVertical);
 		Vector3 pos = new Vector3(xPos,0.0f,zPos);
 
-		rigidbody.velocity = movement * Speed;
-		rigidbody.position = pos;
-		rigidbody.rotation = Quaternion.Euler(-TiltVertical * rigidbody.velocity.z,0.0f,-TiltHorizontal * rigidbody.velocity.x);
+		GetComponent<Rigidbody>().velocity = movement * Speed;
+		GetComponent<Rigidbody>().position = pos;
+		GetComponent<Rigidbody>().rotation = Quaternion.Euler(-TiltVertical * GetComponent<Rigidbody>().velocity.z,0.0f,-TiltHorizontal * GetComponent<Rigidbody>().velocity.x);
 
 		//
 		UpdateHealthLevel();
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButton("Fire1") && Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
 			Instantiate(shot, new Vector3(shotSpawn.position.x,0.0f,shotSpawn.position.z), Quaternion.Euler(0.0f,0.0f,shotSpawn.rotation.z));
-			audio.Play();
+			GetComponent<AudioSource>().Play();
 		}
 	}
 

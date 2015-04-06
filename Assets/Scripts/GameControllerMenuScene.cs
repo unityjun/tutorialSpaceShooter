@@ -22,7 +22,7 @@ public class GameControllerMenuScene : MonoBehaviour {
 	}
 
 	public void StartGame(){
-		WaitForAnimation(animatorComponent.animation);
+		WaitForAnimation(animatorComponent.GetComponent<Animation>());
 		Application.LoadLevel("mainScene");
 	}
 	

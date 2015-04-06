@@ -8,7 +8,7 @@ public class RandomRotator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-		rigidbody.angularVelocity = Random.insideUnitSphere * tumble;
+		GetComponent<Rigidbody>().angularVelocity = Random.insideUnitSphere * tumble;
 	}
 
 }
