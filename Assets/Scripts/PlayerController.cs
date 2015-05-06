@@ -18,20 +18,21 @@ public class PlayerController : MonoBehaviour {
 	public Transform shotSpawn;
 
 	public float Speed = 1.0f;
-	public float TiltHorizontal = 3.0f;
-	public float TiltVertical = 1.0f;
+	public float TiltHorizontal = 0.5f;
+	public float TiltVertical = 3.0f;
 
 	public Boundary boundary;
-	
 	public float fireRate;
 
 	private float nextFire;
-	private playerHealth uiPlayerHealthScript;
 	private float healthLevel = 10;
 
+	private playerHealth uiPlayerHealthScript;
 	private GameController gameController;
+	private AudioSource audioSouce;
+	private Rigidbody rigidBody;
 
-	public void Start(){
+	void Awake(){
 
 		//
 		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
@@ -39,43 +40,79 @@ public class PlayerController : MonoBehaviour {
 			gameController = gameControllerObject.GetComponent<GameController>();
 		}
 
+		//
 		uiPlayerHealthScript = UIPlayerHealth.GetComponent<playerHealth>() as playerHealth;
+		//
+		audioSouce = GetComponent<AudioSource> ();
+		//
+		rigidBody = GetComponent<Rigidbody> ();
+	}
+
+	public void Start(){
+
 		uiPlayerHealthScript.SetLevel(healthLevel);
 
+	}
+
+	void Update(){
+		
+		if (Input.GetButton("Fire1") 
+		    && Time.time >= nextFire) {
+
+			//timer
+			nextFire = Time.time + fireRate;
+
+			Shoting();
+		}
+	}
+
+	void Shoting(){
+		//ffiiiiireeee!
+		Vector3 eulerAngles = transform.rotation.eulerAngles;
+		GameObject shootGO = (GameObject)Instantiate(shot, new Vector3(shotSpawn.position.x,0.0f,shotSpawn.position.z), Quaternion.Euler(0.0f,eulerAngles.y,shotSpawn.rotation.z));
+
+		Mover mover = shootGO.GetComponent<Mover>();
+		mover.Move (shotSpawn.transform.forward);
+		//play shoot sound
+		audioSouce.Play();
 	}
 
 	void FixedUpdate(){
 
 		float moveHorizontal = Input.GetAxis("Horizontal"); //x
 		float moveVertical = Input.GetAxis("Vertical"); //z
-
-		float xPos = Mathf.Clamp(GetComponent<Rigidbody>().position.x,boundary.xMin,boundary.xMax);
-		float zPos = Mathf.Clamp(GetComponent<Rigidbody>().position.z,boundary.zMin,boundary.zMax);
-
-		Vector3 movement = new Vector3(moveHorizontal,0.0f,moveVertical);
-		Vector3 pos = new Vector3(xPos,0.0f,zPos);
-
-		GetComponent<Rigidbody>().velocity = movement * Speed;
-		GetComponent<Rigidbody>().position = pos;
-		GetComponent<Rigidbody>().rotation = Quaternion.Euler(-TiltVertical * GetComponent<Rigidbody>().velocity.z,0.0f,-TiltHorizontal * GetComponent<Rigidbody>().velocity.x);
-
+		//
+		Move (moveHorizontal,moveVertical);
 		//
 		UpdateHealthLevel();
 	}
 
-	void Update(){
+	void Move(float H, float V){
 
-		if (Input.GetButton("Fire1") && Time.time > nextFire) {
-			nextFire = Time.time + fireRate;
-			Instantiate(shot, new Vector3(shotSpawn.position.x,0.0f,shotSpawn.position.z), Quaternion.Euler(0.0f,0.0f,shotSpawn.rotation.z));
-			GetComponent<AudioSource>().Play();
-		}
+		float xPos = Mathf.Clamp(rigidBody.position.x,boundary.xMin,boundary.xMax);
+		float zPos = Mathf.Clamp(rigidBody.position.z,boundary.zMin,boundary.zMax);
+
+		Vector3 movement = new Vector3(H,0.0f,V);
+		Vector3 pos = new Vector3(xPos,0.0f,zPos);
+		
+		rigidBody.velocity = movement * Speed;
+		rigidBody.position = pos;
+
+		//rotaion
+		Vector3 eulerAngles = transform.rotation.eulerAngles;
+		rigidBody.rotation = Quaternion.Euler(eulerAngles.x
+		                                      	,eulerAngles.y
+		                                      	,TiltVertical * rigidBody.velocity.z);
+
 	}
+
 
 	void OnTriggerEnter(Collider other) {
 		
 		if(other.tag == "Asteroid"){
+
 			float damage = Random.Range(1,2);
+
 			healthLevel = healthLevel - damage;
 			//
 			UpdateHealthLevel();
@@ -92,7 +129,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void PlayerDestroy(){
+		//boom!
 		Instantiate(playerExplosion, transform.position, transform.rotation);
+		//
 		Destroy(gameObject);
 	}
 }

@@ -1,35 +1,35 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class GameControllerMenuScene : MonoBehaviour {
+public class MenuSceneController : MonoBehaviour {
 
 	public GameObject GUIMenu;
 
 	private Animator animatorComponent;
-
-	public void Start(){
+	void Awake(){
 		//initialize
 		animatorComponent = GUIMenu.GetComponent<Animator>();
+	}
+
+	public void Start(){
 		animatorComponent.SetBool("showMenu",true);
 	}
 	
 	public void Update(){
 		if (Input.GetKeyDown(KeyCode.P)){
-			Animator animatorComponent = GUIMenu.GetComponent<Animator>();
 			animatorComponent.SetBool("showMenu",!animatorComponent.GetBool("showMenu"));
 		}
 	}
 
 	public void StartGame(){
 		WaitForAnimation(animatorComponent.GetComponent<Animation>());
-		Application.LoadLevel("mainScene");
+		Application.LoadLevel("Scene_01");
 	}
 	
 	private IEnumerator WaitForAnimation ( Animation animation )
 	{
-		do
-		{
+		do{
 			yield return null;
 		} while ( animation.isPlaying );
 	}
