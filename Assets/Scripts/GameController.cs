@@ -3,10 +3,7 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-	public float startWait;
-	public float waveWait;
-	
-	private bool gameOver;
+	private bool gameOver = false;
 	private int score;
 
 	private SpawnWavesScript spawnWavesScript;
@@ -24,7 +21,7 @@ public class GameController : MonoBehaviour {
 		score = 0;
 		UpdateScore();
 
-		StartCoroutine(SpawnWaves());
+		spawnWavesScript.StartWave();
 	}
 
 	void Update(){
@@ -33,26 +30,9 @@ public class GameController : MonoBehaviour {
 			Application.LoadLevel("Menu");
 		}
 	}
-	
-	IEnumerator SpawnWaves(){
-
-		yield return new WaitForSeconds(startWait);
-		while(true){
-			//
-			StartCoroutine(spawnWavesScript.StartWave());
-
-			yield return new WaitForSeconds(waveWait);
-
-			if(gameOver){
-				break;
-			}
-		}
-	}
 
 	public void RestartLevel(){
-		//
-		GameOver (false);
-		//
+		gameOver = false;
 		Application.LoadLevel(Application.loadedLevel);
 	}
 
@@ -61,9 +41,11 @@ public class GameController : MonoBehaviour {
 		UpdateScore();
 	}
 
-	public void GameOver(bool val = true){
-		gameOver = val;
-		guiControllerScript.GameOver (gameOver);
+	public void GameOver(){
+		gameOver = true;
+
+		spawnWavesScript.GameOver ();
+		guiControllerScript.GameOver ();
 	}
 
 	void UpdateScore(){

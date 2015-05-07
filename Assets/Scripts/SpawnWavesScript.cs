@@ -3,25 +3,39 @@ using System.Collections;
 
 public class SpawnWavesScript : MonoBehaviour {
 	
-	public float spawnWait;
 	public float startWait;
 	public float waveWait;
+	public float spawnWait;
 
 	public GameObject Asteroid;
 	public Transform[] spawnPoints;
 
-	public IEnumerator StartWave(){
+	private bool gameOver = false;
 
-		ArrayList indexesSpawnPoints = new ArrayList ();
-		foreach(Transform p in spawnPoints){
-			indexesSpawnPoints.Add(p);
-		}
+	public void StartWave(){
+		StartCoroutine (StartWaves());
+	}
 
-		while(indexesSpawnPoints.Count > 0){
-			Transform point = TakeSpawnPoint(ref indexesSpawnPoints);
-			ShootAsteroid(point);
-			//
-			yield return new WaitForSeconds(spawnWait);
+	public void GameOver(){
+		gameOver = true;
+	}
+
+	public IEnumerator StartWaves(){
+		yield return new WaitForSeconds(startWait);
+		while(!gameOver){
+			ArrayList indexesSpawnPoints = new ArrayList ();
+			foreach(Transform p in spawnPoints){
+				indexesSpawnPoints.Add(p);
+			}
+
+			while(indexesSpawnPoints.Count > 0){
+				Transform point = TakeSpawnPoint(ref indexesSpawnPoints);
+				ShootAsteroid(point);
+				//
+				yield return new WaitForSeconds(spawnWait);
+			}
+
+			yield return new WaitForSeconds(waveWait);
 		}
 	}
 
