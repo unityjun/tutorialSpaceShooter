@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameController : MonoBehaviour {
+public class GameControllerScript : MonoBehaviour {
 
-	private bool gameOver = false;
 	private int score;
 
 	private SpawnWavesScript spawnWavesScript;
@@ -32,20 +31,19 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void RestartLevel(){
-		gameOver = false;
+
 		Application.LoadLevel(Application.loadedLevel);
+
+	}
+
+	public void GameOver(){
+		spawnWavesScript.GameOver ();
+		guiControllerScript.GameOver ();
 	}
 
 	public void AddScore(int newScoreValue){
 		score += newScoreValue;
 		UpdateScore();
-	}
-
-	public void GameOver(){
-		gameOver = true;
-
-		spawnWavesScript.GameOver ();
-		guiControllerScript.GameOver ();
 	}
 
 	void UpdateScore(){

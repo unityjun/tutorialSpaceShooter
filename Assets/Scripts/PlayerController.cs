@@ -27,21 +27,19 @@ public class PlayerController : MonoBehaviour {
 	private float nextFire;
 	private float healthLevel = 10;
 
-	private playerHealth uiPlayerHealthScript;
-	private GameController gameController;
+	private GameControllerScript gameControllerScript;
+	private GUIControllerScript guiControllerScript;
 	private AudioSource audioSouce;
 	private Rigidbody rigidBody;
 
 	void Awake(){
-
 		//
 		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
 		if(gameControllerObject != null){
-			gameController = gameControllerObject.GetComponent<GameController>();
+			gameControllerScript = gameControllerObject.GetComponent<GameControllerScript>();
+			guiControllerScript = gameControllerObject.GetComponent<GUIControllerScript>();
 		}
 
-		//
-		uiPlayerHealthScript = UIPlayerHealth.GetComponent<playerHealth>() as playerHealth;
 		//
 		audioSouce = GetComponent<AudioSource> ();
 		//
@@ -50,7 +48,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Start(){
 
-		uiPlayerHealthScript.SetLevel(healthLevel);
+		guiControllerScript.UpdateHealthLevel(healthLevel);
 
 	}
 
@@ -73,14 +71,15 @@ public class PlayerController : MonoBehaviour {
 
 		Mover mover = shootGO.GetComponent<Mover>();
 		mover.Move (shotSpawn.transform.forward);
+
 		//play shoot sound
 		audioSouce.Play();
 	}
 
 	void FixedUpdate(){
-
 		float moveHorizontal = Input.GetAxis("Horizontal"); //x
 		float moveVertical = Input.GetAxis("Vertical"); //z
+
 		//
 		Move (moveHorizontal,moveVertical);
 		//
@@ -118,14 +117,16 @@ public class PlayerController : MonoBehaviour {
 			UpdateHealthLevel();
 			//
 			if(healthLevel <= 0 ){
-				gameController.GameOver();
+				gameControllerScript.GameOver();
 				PlayerDestroy();
 			}
 		}
 	}
 
 	void UpdateHealthLevel(){
-		uiPlayerHealthScript.SetLevel(healthLevel);
+
+		guiControllerScript.UpdateHealthLevel(healthLevel);
+
 	}
 
 	void PlayerDestroy(){

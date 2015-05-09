@@ -4,18 +4,14 @@ using System.Collections;
 public class DestroyByContact : MonoBehaviour {
 
 	public GameObject explosion;
-	private GameController gameController;
-
 	public int scoreValue;
 
-	void Start(){
+	private GameControllerScript gameControllerScript;
+
+	void Awake(){
+
 		GameObject gameControllerObject = GameObject.FindWithTag("GameController");
-		if(gameControllerObject != null){
-			gameController = gameControllerObject.GetComponent<GameController>();
-		}
-		if(gameController != null){
-			//Debug.Log("Cannot find <GameController> script");
-		}
+		gameControllerScript = gameControllerObject.GetComponent<GameControllerScript>();
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -28,7 +24,7 @@ public class DestroyByContact : MonoBehaviour {
 		Instantiate(explosion, transform.position, transform.rotation);
 		Destroy(gameObject);
 		//score
-		gameController.AddScore(scoreValue);
+		gameControllerScript.AddScore(scoreValue);
 
 		if(other.tag != "Player"){
 			//
